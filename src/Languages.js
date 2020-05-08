@@ -2,6 +2,10 @@
 const Languages = {
   languages: [
     {
+      // IMP: The entire file is based on Malayalam alphabets.
+      // To add another language, follow the order of Malayalam.
+      // Put a hyphen in the place of missing letter.
+      // Diacritics use contents of key: letters as key.
       name: "Malayalam",
       letters: [
         "അ",
