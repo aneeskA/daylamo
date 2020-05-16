@@ -1,6 +1,6 @@
 {
   "name": "daylamo",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "author": {
     "name": "aneeskA",
@@ -35,13 +35,23 @@
     "extends": "react-app"
   },
   "build": {
-    "appId": "com.daylamo.electron-cra",
+    "appId": "com.aneeska.daylamo",
+    "productName": "daylamo",
+    "copyright": "Copyright © 2020 aneeskA",
+    "mac": {
+      "icon": "./public/daylamo.icns",
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "icon": "./public/logo512.png"
+    },
     "files": [
       "build/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "./public/**/*"
     ],
     "directories":{
-      "buildResources": "assets"
+      "buildResources": "public"
     }
   },
   "browserslist": {
