@@ -1,4 +1,4 @@
-# daylamo
+# [daylamo](https://daylamo.com)
 
 This tool was born out of a necessity to learn to read Kannada by a Malayali living in Bangalore. Since this Malayali knew Malayalam, it made sense to his lazy bones to (ab)use that advantage. He called it [daylamo](https://daylamo.com) (with a lot of help from his brother).
 
