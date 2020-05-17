@@ -476,7 +476,6 @@ export default function Review() {
           <Grid item xs={1} sm={3} md={3} lg={3} xl={3}></Grid>
         )}
       </Grid>
-      <Footer />
     </div>
   );
 }

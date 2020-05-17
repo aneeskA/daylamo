@@ -6,7 +6,7 @@ import Card from "@material-ui/core/Card";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
   },
   disclaimer: {
-      fontSize: 8,
-  }
+    fontSize: 8,
+  },
 }));
 
 export default function About() {
@@ -71,8 +71,16 @@ export default function About() {
             Indian language using the one(s) they know already. For example, if
             you are a Malayali living in Bangalore, it shows Kannada alphabets
             alongside its equivalent sounding Malayalam alphabet. This, the
-            author has discovered, significantly
-            improves the learning velocity<sup><Link target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">patent-pending</Link></sup>.
+            author has discovered, significantly improves the learning velocity
+            <sup>
+              <Link
+                target="_blank"
+                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              >
+                patent-pending
+              </Link>
+            </sup>
+            .
             <br />
             <br />
             Hope this tool helps you too.
@@ -81,19 +89,29 @@ export default function About() {
             <Link target="_blank" href="https://www.linkedin.com/in/aneeska/">
               aneeskA
             </Link>
+            , creator
             <br />
-            <br />
-            <Divider />
-            <br />
-            UX credit :{" "}
+          </Typography>
+        </Grid>
+        <Grid item xs={1} sm={3} md={3} lg={3} xl={3}></Grid>
+        <Grid item xs={1} sm={3} md={3} lg={3} xl={3}></Grid>
+        <Grid
+          item
+          xs={10}
+          sm={6}
+          md={6}
+          lg={6}
+          xl={6}
+          component={Card}
+          className={classes.card}
+        >
+          <Typography className={classes.content}>
+            <h4>Credits</h4>
             <Link target="_blank" href="https://www.linkedin.com/in/anaska/">
               Anas K A
             </Link>
+            , UX
             <br />
-            <br />
-            <div className={classes.disclaimer}><b>
-              <sup>*</sup>
-            </b>Not all languages are supported today.</div>
           </Typography>
         </Grid>
         <Grid item xs={1} sm={3} md={3} lg={3} xl={3}></Grid>
