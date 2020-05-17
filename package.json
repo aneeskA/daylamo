@@ -43,7 +43,7 @@
       "category": "public.app-category.utilities"
     },
     "win": {
-      "icon": "./public/logo512.png"
+      "icon": "./public/logo512w.png"
     },
     "files": [
       "build/**/*",
