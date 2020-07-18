@@ -32,57 +32,53 @@ export default function Learn() {
   // source language
   const getLangSrc = () => {
     if (localStorage.getItem(prefix + "langSrc") === null) {
-        return 0;
-      }
-      return parseInt(localStorage.getItem(prefix + "langSrc"), 10);
-  }
+      return 0;
+    }
+    return parseInt(localStorage.getItem(prefix + "langSrc"), 10);
+  };
   const [langSrc, setLangSrc] = React.useState(() => {
-    return getLangSrc()
+    return getLangSrc();
   });
 
   const getLangSrcLetter = () => {
     if (localStorage.getItem(prefix + "langSrcLetter") === null) return 0;
     return parseInt(localStorage.getItem(prefix + "langSrcLetter"), 10);
-  }
+  };
   // current src letter
   const [langSrcLetter, setLangSrcLetter] = React.useState(() => {
-    return getLangSrcLetter()
+    return getLangSrcLetter();
   });
 
   // current src letter diacritic
   const [langSrcLetterDiac, setLangSrcLetterDiac] = React.useState(() => {
-    if (isNaN(localStorage.getItem(prefix + "langSrcLetterDiac"))) 
-        return 1;
-    if (localStorage.getItem(prefix + "langSrcLetterDiac") === null) 
-        return 1;
+    if (isNaN(localStorage.getItem(prefix + "langSrcLetterDiac"))) return 1;
+    if (localStorage.getItem(prefix + "langSrcLetterDiac") === null) return 1;
     return parseInt(localStorage.getItem(prefix + "langSrcLetterDiac"), 10);
-  })
+  });
 
   // destination language
   const getLangDst = () => {
-    return parseInt(localStorage.getItem(prefix + "langDst"), 10)
-  }
+    return parseInt(localStorage.getItem(prefix + "langDst"), 10);
+  };
   const [langDst, setLangDst] = React.useState(() => {
-      return getLangDst()
+    return getLangDst();
   });
 
   const getLangDstLetter = () => {
     if (localStorage.getItem(prefix + "langDstLetter") === null) return 0;
     return parseInt(localStorage.getItem(prefix + "langDstLetter"), 10);
-  }
+  };
   // current destination letter TODO: need to read from Learn component
   const [langDstLetter, setLangDstLetter] = React.useState(() => {
-    return getLangDstLetter()
+    return getLangDstLetter();
   });
 
   // current destination letter diacritic
   const [langDstLetterDiac, setLangDstLetterDiac] = React.useState(() => {
-    if (isNaN(localStorage.getItem(prefix + "langDstLetterDiac")))
-        return 1;
-    if (localStorage.getItem(prefix + "langDstLetterDiac") === null)
-        return 1;
+    if (isNaN(localStorage.getItem(prefix + "langDstLetterDiac"))) return 1;
+    if (localStorage.getItem(prefix + "langDstLetterDiac") === null) return 1;
     return parseInt(localStorage.getItem(prefix + "langDstLetterDiac"), 10);
-  })
+  });
 
   // get diacritic
   const getLetter = (index, offset) => {
@@ -92,10 +88,9 @@ export default function Learn() {
     if (typeof offset === "undefined" || offset === null) {
       return;
     }
-    
-    let letter = Languages.languages[index].letters[offset]
-    if (letter === "-")
-        return "-"
+
+    let letter = Languages.languages[index].letters[offset];
+    if (letter === "-") return "-";
     return Languages.languages[index].diacritics[letter][langDstLetterDiac];
   };
 
@@ -107,17 +102,19 @@ export default function Learn() {
 
     return parseInt(localStorage.getItem(prefix + "activeStepDiac"), 10);
   });
-  
+
   const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      setLangSrcLetterDiac(langSrcLetterDiac + 1);
-      setLangDstLetterDiac(langDstLetterDiac + 1);
-      localStorage.setItem(prefix + "langSrcLetterDiac", langSrcLetterDiac + 1);
-      localStorage.setItem(prefix + "langDstLetterDiac", langDstLetterDiac + 1);
-      localStorage.setItem(prefix + "activeStepDiac", activeStep + 1);
+    Event("learn", "diacriticNext", Languages.languages[langSrc].name);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setLangSrcLetterDiac(langSrcLetterDiac + 1);
+    setLangDstLetterDiac(langDstLetterDiac + 1);
+    localStorage.setItem(prefix + "langSrcLetterDiac", langSrcLetterDiac + 1);
+    localStorage.setItem(prefix + "langDstLetterDiac", langDstLetterDiac + 1);
+    localStorage.setItem(prefix + "activeStepDiac", activeStep + 1);
   };
 
   const handleBack = () => {
+    Event("learn", "diacriticBack", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     setLangSrcLetterDiac(langSrcLetterDiac - 1);
     setLangDstLetterDiac(langDstLetterDiac - 1);
@@ -130,9 +127,8 @@ export default function Learn() {
     if (typeof index === "undefined" || index == null) {
       return -1;
     }
-    let letter = Languages.languages[index].letters[langSrcLetter]
-    if (letter === "-")
-        return "-"
+    let letter = Languages.languages[index].letters[langSrcLetter];
+    if (letter === "-") return "-";
     return Languages.languages[index].diacritics[letter].length;
   };
 
@@ -165,7 +161,9 @@ export default function Learn() {
             className={classes.card}
           >
             {/* show alphabet */}
-            <Box fontSize={48}>{getLetter(getLangDst(), getLangDstLetter())}</Box>
+            <Box fontSize={48}>
+              {getLetter(getLangDst(), getLangDstLetter())}
+            </Box>
           </Grid>
         )}
       </Grid>
@@ -216,7 +214,6 @@ export default function Learn() {
           </Grid>
         )}
       </Grid>
-
     </div>
   );
 }

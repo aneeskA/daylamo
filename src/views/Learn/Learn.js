@@ -14,13 +14,13 @@ import Languages from "../../Languages";
 import Card from "@material-ui/core/Card";
 import Defines from "../../Defines";
 import Typography from "@material-ui/core/Typography";
-import Footer from "../Footer";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Diacritic from "../Diacritic/Diacritic";
 import IconButton from "@material-ui/core/IconButton";
+import { Event } from "../../components/Tracking";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,6 +100,12 @@ export default function Learn() {
   });
   const handleChangeSrc = (event) => {
     setLangSrc(event.target.value);
+    Event(
+      "learn",
+      "set learn",
+      Languages.languages[event.target.value].name,
+      event.target.value
+    );
     // save choice
     localStorage.setItem(prefix + "langSrc", event.target.value);
   };
@@ -114,6 +120,12 @@ export default function Learn() {
   );
   const handleChangeDst = (event) => {
     setLangDst(event.target.value);
+    Event(
+      "learn",
+      "set know",
+      Languages.languages[event.target.value].name,
+      event.target.value
+    );
     // save choice
     localStorage.setItem(prefix + "langDst", event.target.value);
   };
@@ -141,6 +153,7 @@ export default function Learn() {
     return parseInt(localStorage.getItem(prefix + "activeStep"), 10);
   });
   const handleNext = () => {
+    Event("learn", "next", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setLangSrcLetter(langSrcLetter + 1);
     setLangDstLetter(langDstLetter + 1);
@@ -149,6 +162,7 @@ export default function Learn() {
     localStorage.setItem(prefix + "activeStep", activeStep + 1);
   };
   const handleBack = () => {
+    Event("learn", "back", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     setLangSrcLetter(langSrcLetter - 1);
     setLangDstLetter(langDstLetter - 1);
@@ -273,45 +287,45 @@ export default function Learn() {
             className={classes.shortcut}
           >
             <Box>
-            {typeof langDst !== "undefined" &&
-                  langDst !== null &&
-                  typeof Languages.languages[langDst].diacritics[
-                    getLetter(langDst, langDstLetter)
-                  ] !== "undefined" && (
-                    <ExpansionPanel className={classes.diacritics}>
-                      <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography className={classes.header}>
-                          {
-                            Languages.languages[langDst].diacritics[
-                              getLetter(langDst, langDstLetter)
-                            ][0]
-                          }{" "}
-                          {
-                            Languages.languages[langDst].diacritics[
-                              getLetter(langDst, langDstLetter)
-                            ][1]
-                          }{" "}
-                          {
-                            Languages.languages[langDst].diacritics[
-                              getLetter(langDst, langDstLetter)
-                            ][2]
-                          }{" "}
-                          {
-                            Languages.languages[langDst].diacritics[
-                              getLetter(langDst, langDstLetter)
-                            ][3]
-                          }
-                        </Typography>
-                      </ExpansionPanelSummary>
-                      <ExpansionPanelDetails>
-                        <Diacritic />
-                      </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                  )}
+              {typeof langDst !== "undefined" &&
+                langDst !== null &&
+                typeof Languages.languages[langDst].diacritics[
+                  getLetter(langDst, langDstLetter)
+                ] !== "undefined" && (
+                  <ExpansionPanel className={classes.diacritics}>
+                    <ExpansionPanelSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography className={classes.header}>
+                        {
+                          Languages.languages[langDst].diacritics[
+                            getLetter(langDst, langDstLetter)
+                          ][0]
+                        }{" "}
+                        {
+                          Languages.languages[langDst].diacritics[
+                            getLetter(langDst, langDstLetter)
+                          ][1]
+                        }{" "}
+                        {
+                          Languages.languages[langDst].diacritics[
+                            getLetter(langDst, langDstLetter)
+                          ][2]
+                        }{" "}
+                        {
+                          Languages.languages[langDst].diacritics[
+                            getLetter(langDst, langDstLetter)
+                          ][3]
+                        }
+                      </Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Diacritic />
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                )}
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Typography className={classes.shortcutTitle}>
                   jump to

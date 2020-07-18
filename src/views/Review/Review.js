@@ -15,7 +15,6 @@ import Card from "@material-ui/core/Card";
 import Defines from "../../Defines";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import Footer from "../Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,29 +103,27 @@ export default function Review() {
   });
   const handleChangeSrc = (event) => {
     setLangSrc(event.target.value);
-    setSrcLangLettersAll(getLangLettersAll(event.target.value))
+    setSrcLangLettersAll(getLangLettersAll(event.target.value));
     setReviewLetter(generateLetter(event.target.value, langDst));
     setCorrectAnswer("?");
   };
 
   // build list of entire set of letters including diacritics
   const getLangLettersAll = (lang) => {
-    if (typeof lang === "undefined")
-      return [];
-    
-      var array = [...Languages.languages[lang].letters]
-      for(const letter of Languages.languages[lang].letters) {
-        let l = Languages.languages[lang].diacritics[letter]
-        if (typeof l === "undefined")
-          l = "-"
-        array = array.concat(l)
-      }
-      // console.log(array)
-      return array
-  }
+    if (typeof lang === "undefined") return [];
+
+    var array = [...Languages.languages[lang].letters];
+    for (const letter of Languages.languages[lang].letters) {
+      let l = Languages.languages[lang].diacritics[letter];
+      if (typeof l === "undefined") l = "-";
+      array = array.concat(l);
+    }
+    // console.log(array)
+    return array;
+  };
   const [langSrcLettersAll, setSrcLangLettersAll] = React.useState(() => {
-    return getLangLettersAll(langSrc)
-  })
+    return getLangLettersAll(langSrc);
+  });
 
   // destination language
   const [langDst, setLangDst] = React.useState(() => {
@@ -137,21 +134,18 @@ export default function Review() {
   });
   const handleChangeDst = (event) => {
     setLangDst(event.target.value);
-    setDstLangLettersAll(getLangLettersAll(event.target.value))
+    setDstLangLettersAll(getLangLettersAll(event.target.value));
     setReviewLetter(generateLetter(langSrc, event.target.value));
     setCorrectAnswer("?");
   };
   const [langDstLettersAll, setDstLangLettersAll] = React.useState(() => {
-    return getLangLettersAll(langDst)
-  })
+    return getLangLettersAll(langDst);
+  });
 
   // create src language indices array for question creation
   const [srcArray, setSrcArray] = React.useState(() => {
     if (typeof langSrc !== "undefined") {
-      return createArrayIndices(
-        0,
-        langSrcLettersAll.length - 1
-      );
+      return createArrayIndices(0, langSrcLettersAll.length - 1);
     }
     return [];
   });
@@ -216,25 +210,23 @@ export default function Review() {
     // on every visit, this temp array(s) is needed to accommodate
     // that workflow.
     // basically, my react-fu is bad
-    let templangSrcLettersAll = []
-    let templangDstLettersAll = []
+    let templangSrcLettersAll = [];
+    let templangDstLettersAll = [];
     if (langS !== langSrc) {
-      templangSrcLettersAll = getLangLettersAll(langS)
+      templangSrcLettersAll = getLangLettersAll(langS);
     } else {
-      templangSrcLettersAll = langSrcLettersAll
+      templangSrcLettersAll = langSrcLettersAll;
     }
     if (langD !== langDst) {
-      templangDstLettersAll = getLangLettersAll(langD)
+      templangDstLettersAll = getLangLettersAll(langD);
     } else {
-      templangDstLettersAll = langDstLettersAll
+      templangDstLettersAll = langDstLettersAll;
     }
     // shame ends
 
     if (srcArray.length === 1) {
       const letter = templangSrcLettersAll[srcArray[0]];
-      setSrcArray(
-        createArrayIndices(0, templangSrcLettersAll.length - 1)
-      );
+      setSrcArray(createArrayIndices(0, templangSrcLettersAll.length - 1));
       // answer key
       setAnswerOptions(
         shuffle(answerArray(templangDstLettersAll[srcArray[0]]))
@@ -271,7 +263,8 @@ export default function Review() {
 
   const createDefaultColors = () => {
     let array = [];
-    for (let i = 0; i < 4; i++) { // Change 4 if more options are added
+    for (let i = 0; i < 4; i++) {
+      // Change 4 if more options are added
       array.push(classes.answerDefault);
     }
     return array;
@@ -299,10 +292,11 @@ export default function Review() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
+    Event("review", "next", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setReviewLetter(generateLetter(langSrc, langDst));
     setCorrectAnswer("?");
-    setColorValues(createDefaultColors())
+    setColorValues(createDefaultColors());
   };
   const getSteps = () => {
     if (typeof langSrc === "undefined") {

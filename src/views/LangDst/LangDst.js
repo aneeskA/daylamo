@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import Defines from "../../Defines";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
+import { Event } from "../../components/Tracking";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   header: {
     marginBottom: 20,
     fontSize: 30,
-  }
+  },
 }));
 
 export default function LangDst() {
@@ -65,7 +66,9 @@ export default function LangDst() {
           component={Card}
           className={classes.card}
         >
-          <Typography variant="h4" className={classes.header}>{Defines.Iknow}</Typography>
+          <Typography variant="h4" className={classes.header}>
+            {Defines.Iknow}
+          </Typography>
           <Grid container>
             {Languages.languages.map((language, index) => (
               <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
@@ -73,7 +76,10 @@ export default function LangDst() {
                   variant="outlined"
                   color="primary"
                   value={index}
-                  onClick={handleClick}
+                  onClick={(event) => {
+                    Event("onboard", "know", language.name, index);
+                    handleClick(event);
+                  }}
                   className={classes.langBtn}
                   disabled={index === langSrc ? true : false}
                 >
