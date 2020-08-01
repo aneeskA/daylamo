@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import Defines from "../../Defines";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
-import { Event } from "../../components/Tracking";
+import { GEvent } from "../../components/Tracking";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,7 +77,7 @@ export default function LangDst() {
                   color="primary"
                   value={index}
                   onClick={(event) => {
-                    Event("onboard", "know", language.name, index);
+                    GEvent("onboard", "know", language.name, index);
                     handleClick(event);
                   }}
                   className={classes.langBtn}

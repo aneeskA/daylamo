@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 import Languages from "../../Languages";
 import Card from "@material-ui/core/Card";
 import Defines from "../../Defines";
-import { Event } from "../../components/Tracking";
+import { GEvent } from "../../components/Tracking";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -105,7 +105,7 @@ export default function Learn() {
   });
 
   const handleNext = () => {
-    Event("learn", "diacriticNext", Languages.languages[langSrc].name);
+    GEvent("learn", "diacriticNext", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setLangSrcLetterDiac(langSrcLetterDiac + 1);
     setLangDstLetterDiac(langDstLetterDiac + 1);
@@ -115,7 +115,7 @@ export default function Learn() {
   };
 
   const handleBack = () => {
-    Event("learn", "diacriticBack", Languages.languages[langSrc].name);
+    GEvent("learn", "diacriticBack", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     setLangSrcLetterDiac(langSrcLetterDiac - 1);
     setLangDstLetterDiac(langDstLetterDiac - 1);

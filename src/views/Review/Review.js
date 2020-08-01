@@ -15,7 +15,7 @@ import Card from "@material-ui/core/Card";
 import Defines from "../../Defines";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { Event } from "../../components/Tracking";
+import { GEvent } from "../../components/Tracking";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -293,7 +293,7 @@ export default function Review() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
-    Event("review", "next", Languages.languages[langSrc].name);
+    GEvent("review", "next", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setReviewLetter(generateLetter(langSrc, langDst));
     setCorrectAnswer("?");

@@ -7,7 +7,7 @@ import ReactGA from "react-ga";
  * @param {string} label
  * * @param {number} value
  */
-export const Event = (category, action, label, value) => {
+export const GEvent = (category, action, label, value) => {
   console.log("reactga:event:", category, action, label, value);
   ReactGA.event({
     category: category,

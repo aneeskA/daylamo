@@ -20,7 +20,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Diacritic from "../Diacritic/Diacritic";
 import IconButton from "@material-ui/core/IconButton";
-import { Event } from "../../components/Tracking";
+import { GEvent } from "../../components/Tracking";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,7 +100,7 @@ export default function Learn() {
   });
   const handleChangeSrc = (event) => {
     setLangSrc(event.target.value);
-    Event(
+    GEvent(
       "learn",
       "set learn",
       Languages.languages[event.target.value].name,
@@ -120,7 +120,7 @@ export default function Learn() {
   );
   const handleChangeDst = (event) => {
     setLangDst(event.target.value);
-    Event(
+    GEvent(
       "learn",
       "set know",
       Languages.languages[event.target.value].name,
@@ -153,7 +153,7 @@ export default function Learn() {
     return parseInt(localStorage.getItem(prefix + "activeStep"), 10);
   });
   const handleNext = () => {
-    Event("learn", "next", Languages.languages[langSrc].name);
+    GEvent("learn", "next", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setLangSrcLetter(langSrcLetter + 1);
     setLangDstLetter(langDstLetter + 1);
@@ -162,7 +162,7 @@ export default function Learn() {
     localStorage.setItem(prefix + "activeStep", activeStep + 1);
   };
   const handleBack = () => {
-    Event("learn", "back", Languages.languages[langSrc].name);
+    GEvent("learn", "back", Languages.languages[langSrc].name);
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     setLangSrcLetter(langSrcLetter - 1);
     setLangDstLetter(langDstLetter - 1);
