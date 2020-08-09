@@ -1,0 +1,8 @@
+{
+  "appId": "com.aneeska.daylamo",
+  "appName": "daylamo",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "cordova": {}
+}

@@ -1,0 +1,7 @@
+{
+  "name": "daylamo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

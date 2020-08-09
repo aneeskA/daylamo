@@ -6,6 +6,12 @@ This tool was born out of a necessity to learn to read Kannada by a Malayali liv
 
 Hope this tool helps you too.
 
+## Prerequisites
+
+1. npm
+2. yarn
+3. [ionic](https://medium.com/how-to-react/convert-your-existing-react-js-app-to-android-or-ios-app-using-the-ionic-capacitor-a127deda75bd)
+
 ## Start
 
 ### react
@@ -15,6 +21,10 @@ Hope this tool helps you too.
 ### electron
 
 `yarn start`
+
+### android
+
+`ionic capacitor add android`
 
 ## Build
 
