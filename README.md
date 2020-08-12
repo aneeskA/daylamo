@@ -24,7 +24,7 @@ Hope this tool helps you too.
 
 ### android
 
-`ionic capacitor add android`
+`npx cap open android`
 
 ## Build
 
